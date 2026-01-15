@@ -5,4 +5,4 @@ requests
 pykrx
 altair
 OpenDartReader
-FinanceDataReader
+finance-datareader
