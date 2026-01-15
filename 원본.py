@@ -4574,7 +4574,7 @@ def render_dcf_wacc(info: dict, wide: pd.DataFrame, unit: str, industry_tag: str
 
     auto_beta = st.session_state.beta_val if st.session_state.beta_ok else None
     dte_last = last_value(ratios.get("D/E")) if ratios.get("D/E") is not None else None
-    if dte_last is None:
+    if dte_last is None:    
         dte_last = 0.3
 
     rf = st.number_input("무위험이자율(rf) ■ 5년만기 국공채수익률 이용", value=0.035, step=0.0025, format="%.4f", key="wacc_rf")
@@ -4855,7 +4855,6 @@ with st.sidebar:
         key="sb_industry"
     )
 
-
     st.write("")
     search_btn = st.button("① 회사 검색", use_container_width=True)
     fetch_btn = st.button("② 재무 가져오기", use_container_width=True)
@@ -4932,6 +4931,37 @@ with st.sidebar:
                 st.caption("※ 피어 종목을 찾지 못했습니다(상장/명칭 매칭 문제일 수 있음).")
         else:
             st.caption("※ 업종 태그를 선택하면 해당 업종의 대표 피어가 표로 표시됩니다.")
+
+    # =========================================================
+    # ✅ (추가) 사이드바 좌측 하단 고정 Footer
+    # =========================================================
+    st.markdown(
+        """
+        <style>
+        div[data-testid="stSidebar"] .sidebar-footer {
+            margin-top: 18px;
+            font-size: 11px;
+            line-height: 1.45;
+            color: rgba(0,0,0,0.55);
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+        div[data-testid="stSidebar"] .sidebar-footer b { color: rgba(0,0,0,0.75); }
+        </style>
+
+        <div class="sidebar-footer">
+            <b> 조현규 </b> · 2026.01.15 <br/>
+            Data: DART · KRX(pykrx) · BOK ECOS <br/>
+            Built with GPT-assisted(+background) <br/>       
+            기업 & 밸류에이션 분석용(가벼운) 대시보드 
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
 
 
